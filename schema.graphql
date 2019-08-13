@@ -1,0 +1,14 @@
+type CreatePoolWithMetadata @entity {
+  id: ID!
+  sender: Bytes! # address
+  pool: Bytes! # address
+  renounceOwnership: Boolean! # bool
+  metadata: Bytes! # bytes
+}
+
+type CreatePool @entity {
+  id: ID!
+  sender: Bytes! # address
+  pool: Bytes! # address
+  renounceOwnership: Boolean! # bool
+}

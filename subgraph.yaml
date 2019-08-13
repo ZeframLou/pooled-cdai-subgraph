@@ -1,0 +1,26 @@
+specVersion: 0.0.1
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum/contract
+    name: Contract
+    network: mainnet
+    source:
+      address: "0x64bF69F73F450EF644bC1C8E0F7B3960EeBc5bF8"
+      abi: Contract
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.2
+      language: wasm/assemblyscript
+      entities:
+        - CreatePoolWithMetadata
+        - CreatePool
+      abis:
+        - name: Contract
+          file: ./abis/Contract.json
+      eventHandlers:
+        - event: CreatePoolWithMetadata(address,address,indexed bool,bytes)
+          handler: handleCreatePoolWithMetadata
+        - event: CreatePool(address,address,indexed bool)
+          handler: handleCreatePool
+      file: ./src/mapping.ts
