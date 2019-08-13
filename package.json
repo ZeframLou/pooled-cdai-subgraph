@@ -1,6 +1,6 @@
 {
   "name": "pooled-cdai",
-  "license": "UNLICENSED",
+  "license": "GNU GPL V3.0",
   "scripts": {
     "codegen": "graph codegen",
     "build": "graph build",
