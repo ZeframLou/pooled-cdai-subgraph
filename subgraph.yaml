@@ -3,24 +3,55 @@ schema:
   file: ./schema.graphql
 dataSources:
   - kind: ethereum/contract
-    name: Contract
+    name: Factory
     network: mainnet
     source:
       address: "0x64bF69F73F450EF644bC1C8E0F7B3960EeBc5bF8"
-      abi: Contract
+      abi: Factory
     mapping:
       kind: ethereum/events
-      apiVersion: 0.0.2
+      apiVersion: 0.0.3
       language: wasm/assemblyscript
       entities:
-        - CreatePoolWithMetadata
-        - CreatePool
+        - Pool
       abis:
-        - name: Contract
-          file: ./abis/Contract.json
+        - name: Factory
+          file: ./abis/MetadataPooledCDAIFactory.json
+        - name: Pool
+          file: ./abis/PooledCDAI.json
       eventHandlers:
         - event: CreatePoolWithMetadata(address,address,indexed bool,bytes)
           handler: handleCreatePoolWithMetadata
         - event: CreatePool(address,address,indexed bool)
           handler: handleCreatePool
-      file: ./src/mapping.ts
+      file: ./src/mappings/factory.ts
+    templates:
+      - name: Pool
+        kind: ethereum/contract
+        network: mainnet
+        source:
+          abi: Pool
+        mapping:
+          kind: ethereum/events
+          apiVersion: 0.0.1
+          language: wasm/assemblyscript
+          file: ./src/mappings/pool.ts
+          entities:
+            - Pool
+            - DataPoint
+          abis:
+            - name: Pool
+              file: ./abis/PooledCDAI.json
+            - name: CERC20
+              file: ./abis/CERC20.json
+          eventHandlers:
+            - event: Mint(indexed address,indexed address,uint256)
+              handler: handleMint
+            - event: Burn(indexed address,indexed address,uint256)
+              handler: handleBurn
+            - event: WithdrawInterest(indexed address,address,uint256,indexed bool)
+              handler: handleWithdrawInterest
+            - event: SetBeneficiary(address,address)
+              handler: SetBeneficiary
+            - event: OwnershipTransferred(indexed address,indexed address)
+              handler: handleOwnershipTransferred

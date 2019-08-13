@@ -1,14 +1,24 @@
-type CreatePoolWithMetadata @entity {
-  id: ID!
-  sender: Bytes! # address
-  pool: Bytes! # address
-  renounceOwnership: Boolean! # bool
-  metadata: Bytes! # bytes
+type Pool @entity {
+  id: ID! # the address of the pcDAI contract
+  totalSupply: BigDecimal!
+  totalSupplyHistory: [DataPoint!]!
+  totalInterestWithdrawn: BigDecimal!
+  totalInterestWithdrawnHistory: [DataPoint!]!
+  beneficiary: String!
+  creator: String!
+  creationTimestamp: BigInt!
+  owner: String!
+  name: String!
+  symbol: String!
+  # metadata stored on IPFS
+  description: String!
+  ownershipProof: String!
+  logoUrl: String!
 }
 
-type CreatePool @entity {
+type DataPoint @entity {
   id: ID!
-  sender: Bytes! # address
-  pool: Bytes! # address
-  renounceOwnership: Boolean! # bool
+  pool: Pool!
+  timestamp: BigInt!
+  value: BigDecimal!
 }
