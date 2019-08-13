@@ -52,6 +52,6 @@ dataSources:
             - event: WithdrawInterest(indexed address,address,uint256,indexed bool)
               handler: handleWithdrawInterest
             - event: SetBeneficiary(address,address)
-              handler: SetBeneficiary
+              handler: handleSetBeneficiary
             - event: OwnershipTransferred(indexed address,indexed address)
               handler: handleOwnershipTransferred
