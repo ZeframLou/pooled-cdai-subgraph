@@ -5,7 +5,7 @@ import {
 import { Pool } from "../../generated/schema"
 import { Pool as PoolContract } from "../../generated/Factory/Pool"
 import { Pool as PoolTemplate } from "../../generated/Factory/templates"
-import { json, JSONValueKind } from '@graphprotocol/graph-ts'
+import { json, JSONValueKind, ipfs, Bytes } from '@graphprotocol/graph-ts'
 import * as Utils from '../utils'
 
 export function handleCreatePoolWithMetadata(
@@ -26,17 +26,31 @@ export function handleCreatePoolWithMetadata(
   entity.symbol = contract.symbol()
 
   // read JSON metadata from IPFS
-  let rawMeta = json.fromBytes(event.params.metadata)
-  if (rawMeta.kind == JSONValueKind.OBJECT) {
-    let meta = rawMeta.toObject()
+  if (event.params.metadata.length > 0) {
+    let ipfsHash = event.params.metadata.toBase58();
+    let rawBytes = ipfs.cat(ipfsHash)
+    if (rawBytes != null) {
+      let rawMeta = json.fromBytes(rawBytes as Bytes)
+      if (rawMeta.kind == JSONValueKind.OBJECT) {
+        let meta = rawMeta.toObject()
 
-    let description = meta.get('description')
-    let ownershipProof = meta.get('ownershipProof')
-    let logoUrl = meta.get('logoUrl')
+        let description = meta.get('description')
+        let ownershipProof = meta.get('ownershipProof')
+        let logoUrl = meta.get('logoUrl')
 
-    entity.description = description.kind == JSONValueKind.STRING ? description.toString() : ""
-    entity.ownershipProof = ownershipProof.kind == JSONValueKind.STRING ? ownershipProof.toString() : ""
-    entity.logoUrl = logoUrl.kind == JSONValueKind.STRING ? logoUrl.toString() : ""
+        entity.description = description.kind == JSONValueKind.STRING ? description.toString() : ""
+        entity.ownershipProof = ownershipProof.kind == JSONValueKind.STRING ? ownershipProof.toString() : ""
+        entity.logoUrl = logoUrl.kind == JSONValueKind.STRING ? logoUrl.toString() : ""
+      } else {
+        entity.description = ""
+        entity.ownershipProof = ""
+        entity.logoUrl = ""
+      }
+    } else {
+      entity.description = ""
+      entity.ownershipProof = ""
+      entity.logoUrl = ""
+    }
   } else {
     entity.description = ""
     entity.ownershipProof = ""
