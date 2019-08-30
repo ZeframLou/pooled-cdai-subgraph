@@ -10,10 +10,6 @@ type Pool @entity {
   owner: String!
   name: String!
   symbol: String!
-  # metadata stored on IPFS
-  description: String!
-  ownershipProof: String!
-  logoUrl: String!
 }
 
 type DataPoint @entity {
