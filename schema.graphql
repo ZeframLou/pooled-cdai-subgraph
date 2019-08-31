@@ -18,3 +18,8 @@ type DataPoint @entity {
   timestamp: BigInt!
   value: BigDecimal!
 }
+
+type Registry @entity {
+  id: ID!
+  numPools: BigInt!
+}

@@ -14,6 +14,7 @@ dataSources:
       language: wasm/assemblyscript
       entities:
         - Pool
+        - Registry
       abis:
         - name: Factory
           file: ./abis/MetadataPooledCDAIFactory.json

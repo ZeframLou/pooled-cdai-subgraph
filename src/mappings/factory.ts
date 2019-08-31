@@ -2,10 +2,11 @@ import {
   CreatePoolWithMetadata as CreatePoolWithMetadataEvent,
   CreatePool as CreatePoolEvent
 } from "../../generated/Factory/Factory"
-import { Pool } from "../../generated/schema"
+import { Pool, Registry } from "../../generated/schema"
 import { Pool as PoolContract } from "../../generated/Factory/Pool"
 import { Pool as PoolTemplate } from "../../generated/Factory/templates"
 import * as Utils from '../utils'
+import { BigInt } from "@graphprotocol/graph-ts";
 
 export function handleCreatePoolWithMetadata(
   event: CreatePoolWithMetadataEvent
@@ -28,6 +29,15 @@ export function handleCreatePoolWithMetadata(
 
   // create datasource template for Pool
   PoolTemplate.create(event.params.pool)
+
+  // increase numPools
+  let reg = Registry.load('0')
+  if (reg == null) {
+    reg = new Registry('0')
+    reg.numPools = Utils.ZERO_INT
+  }
+  reg.numPools = reg.numPools.plus(BigInt.fromI32(1))
+  reg.save()
 }
 
 export function handleCreatePool(event: CreatePoolEvent): void {
@@ -49,4 +59,13 @@ export function handleCreatePool(event: CreatePoolEvent): void {
 
   // create datasource template for Pool
   PoolTemplate.create(event.params.pool)
+
+  // increase numPools
+  let reg = Registry.load('0')
+  if (reg == null) {
+    reg = new Registry('0')
+    reg.numPools = Utils.ZERO_INT
+  }
+  reg.numPools = reg.numPools.plus(BigInt.fromI32(1))
+  reg.save()
 }

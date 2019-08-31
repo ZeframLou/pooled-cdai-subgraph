@@ -1,4 +1,4 @@
-import { BigDecimal, BigInt, json, JSONValueKind, JSONValue } from "@graphprotocol/graph-ts";
+import { BigDecimal, BigInt } from "@graphprotocol/graph-ts";
 
 export let ZERO_INT = BigInt.fromI32(0)
 export let ZERO_DEC = BigDecimal.fromString('0')
