@@ -33,7 +33,6 @@ export function handleCreatePoolWithMetadata(
     // add beneficiary to list
     let beneficiaryAddr = tryBeneficiary.value.value0.toHex()
     let beneficiary = new Beneficiary(event.transaction.hash.toHex() + Utils.DELIMITER + entity.id + Utils.DELIMITER + beneficiaryAddr + Utils.DELIMITER + i.toString())
-    beneficiary.address = beneficiaryAddr
     beneficiary.pool = entity.id
     beneficiary.dest = beneficiaryAddr
     beneficiary.weight = tryBeneficiary.value.value1
@@ -85,7 +84,6 @@ export function handleCreatePool(event: CreatePoolEvent): void {
     // add beneficiary to list
     let beneficiaryAddr = tryBeneficiary.value.value0.toHex()
     let beneficiary = new Beneficiary(event.transaction.hash.toHex() + Utils.DELIMITER + entity.id + Utils.DELIMITER + beneficiaryAddr + Utils.DELIMITER + i.toString())
-    beneficiary.address = beneficiaryAddr
     beneficiary.pool = entity.id
     beneficiary.dest = beneficiaryAddr
     beneficiary.weight = tryBeneficiary.value.value1

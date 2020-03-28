@@ -30,7 +30,6 @@ type Registry @entity {
 
 type Beneficiary @entity {
   id: ID!
-  address: String!
   pool: Pool!
   dest: String!
   weight: BigInt!

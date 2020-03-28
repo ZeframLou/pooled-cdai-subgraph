@@ -71,11 +71,11 @@ export function handleWithdrawInterest(event: WithdrawInterestEvent): void {
   for (let i = 0; i < pool.beneficiaries.length; i++) {
     let beneficiaryID = beneficiaries[i]
     let beneficiary = Beneficiary.load(beneficiaryID)
-    let beneficiaryHistoryID = pool.address + Utils.DELIMITER + beneficiary.address
+    let beneficiaryHistoryID = pool.address + Utils.DELIMITER + beneficiary.dest
     let beneficiaryHistory = BeneficiaryHistory.load(beneficiaryHistoryID)
     if (!beneficiaryHistory) {
       beneficiaryHistory = new BeneficiaryHistory(beneficiaryHistoryID)
-      beneficiaryHistory.address = beneficiary.address
+      beneficiaryHistory.address = beneficiary.dest
       beneficiaryHistory.pool = pool.id
       beneficiaryHistory.totalInterestReceived = Utils.ZERO_DEC
       beneficiaryHistory.totalInterestReceivedHistory = new Array<string>()
@@ -115,7 +115,6 @@ export function handleSetBeneficiaries(event: SetBeneficiariesEvent): void {
     // add beneficiary to list
     let beneficiaryAddr = tryBeneficiary.value.value0.toHex()
     let beneficiary = new Beneficiary(event.transaction.hash.toHex() + Utils.DELIMITER + pool.id + Utils.DELIMITER + beneficiaryAddr + Utils.DELIMITER + i.toString())
-    beneficiary.address = beneficiaryAddr
     beneficiary.pool = pool.id
     beneficiary.dest = beneficiaryAddr
     beneficiary.weight = tryBeneficiary.value.value1
