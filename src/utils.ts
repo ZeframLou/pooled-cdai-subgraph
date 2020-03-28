@@ -3,6 +3,7 @@ import { BigDecimal, BigInt } from "@graphprotocol/graph-ts";
 export let ZERO_INT = BigInt.fromI32(0)
 export let ZERO_DEC = BigDecimal.fromString('0')
 export let PRECISION = new BigDecimal(tenPow(18))
+export let DELIMITER = "---"
 
 export function tenPow(exponent: number): BigInt {
   let result = BigInt.fromI32(1)
