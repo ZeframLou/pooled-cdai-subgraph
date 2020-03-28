@@ -1,15 +1,19 @@
 type Pool @entity {
   id: ID! # the address of the pcDAI contract
+  address: String!
   totalSupply: BigDecimal!
   totalSupplyHistory: [DataPoint!]!
   totalInterestWithdrawn: BigDecimal!
   totalInterestWithdrawnHistory: [DataPoint!]!
-  beneficiary: String!
+  beneficiaries: [Beneficiary!]!
+  numBeneficiaries: BigInt!
+  beneficiaryInterestHistory: [BeneficiaryHistory!]! @derivedFrom(field: "pool")
   creator: String!
   creationTimestamp: BigInt!
   owner: String!
   name: String!
   symbol: String!
+  totalBeneficiaryWeight: BigInt!
 }
 
 type DataPoint @entity {
@@ -22,4 +26,20 @@ type DataPoint @entity {
 type Registry @entity {
   id: ID!
   numPools: BigInt!
+}
+
+type Beneficiary @entity {
+  id: ID!
+  address: String!
+  pool: Pool!
+  dest: String!
+  weight: BigInt!
+}
+
+type BeneficiaryHistory @entity {
+  id: ID!
+  address: String!
+  pool: Pool!
+  totalInterestReceived: BigDecimal!
+  totalInterestReceivedHistory: [DataPoint!]!
 }

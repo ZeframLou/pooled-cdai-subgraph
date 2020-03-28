@@ -1,4 +1,4 @@
-specVersion: 0.0.1
+specVersion: 0.0.2
 schema:
   file: ./schema.graphql
 dataSources:
@@ -6,8 +6,9 @@ dataSources:
     name: Factory
     network: mainnet
     source:
-      address: "0xd91d45e8f0de4ac5edefe4dc9425a808eb13a324"
+      address: "0xB72B4B94d1eD3Cc382D5beEEfE3d03dd55Ad8229"
       abi: Factory
+      startBlock: 9756867
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.3
@@ -15,6 +16,7 @@ dataSources:
       entities:
         - Pool
         - Registry
+        - Beneficiary
       abis:
         - name: Factory
           file: ./abis/MetadataPooledCDAIFactory.json
@@ -26,33 +28,34 @@ dataSources:
         - event: CreatePool(address,address,indexed bool)
           handler: handleCreatePool
       file: ./src/mappings/factory.ts
-    templates:
-      - name: Pool
-        kind: ethereum/contract
-        network: mainnet
-        source:
-          abi: Pool
-        mapping:
-          kind: ethereum/events
-          apiVersion: 0.0.1
-          language: wasm/assemblyscript
-          file: ./src/mappings/pool.ts
-          entities:
-            - Pool
-            - DataPoint
-          abis:
-            - name: Pool
-              file: ./abis/PooledCDAI.json
-            - name: CERC20
-              file: ./abis/CERC20.json
-          eventHandlers:
-            - event: Mint(indexed address,indexed address,uint256)
-              handler: handleMint
-            - event: Burn(indexed address,indexed address,uint256)
-              handler: handleBurn
-            - event: WithdrawInterest(indexed address,address,uint256,indexed bool)
-              handler: handleWithdrawInterest
-            - event: SetBeneficiary(address,address)
-              handler: handleSetBeneficiary
-            - event: OwnershipTransferred(indexed address,indexed address)
-              handler: handleOwnershipTransferred
+templates:
+  - name: Pool
+    kind: ethereum/contract
+    network: mainnet
+    source:
+      abi: Pool
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.3
+      language: wasm/assemblyscript
+      file: ./src/mappings/pool.ts
+      entities:
+        - Pool
+        - DataPoint
+        - Beneficiary
+      abis:
+        - name: Pool
+          file: ./abis/PooledCDAI.json
+        - name: CERC20
+          file: ./abis/CERC20.json
+      eventHandlers:
+        - event: Mint(indexed address,indexed address,uint256)
+          handler: handleMint
+        - event: Burn(indexed address,indexed address,uint256)
+          handler: handleBurn
+        - event: WithdrawInterest(indexed address,uint256)
+          handler: handleWithdrawInterest
+        - event: SetBeneficiaries(indexed address)
+          handler: handleSetBeneficiaries
+        - event: OwnershipTransferred(indexed address,indexed address)
+          handler: handleOwnershipTransferred
