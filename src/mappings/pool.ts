@@ -134,8 +134,10 @@ export function handleSetBeneficiaries(event: SetBeneficiariesEvent): void {
 export function handleOwnershipTransferred(event: OwnershipTransferredEvent): void {
   let pool = Pool.load(event.address.toHex())
 
-  // update beneficiary
-  pool.owner = event.params.newOwner.toHex()
+  if (pool) {
+    // update owner
+    pool.owner = event.params.newOwner.toHex()
 
-  pool.save()
+    pool.save()
+  }
 }
