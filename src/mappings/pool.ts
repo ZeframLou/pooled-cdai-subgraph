@@ -7,7 +7,6 @@ import {
 } from "../../generated/Factory/Pool"
 import { Pool, DataPoint, Beneficiary, BeneficiaryHistory } from "../../generated/schema"
 import { Pool as PoolContract } from "../../generated/Factory/Pool"
-import { CERC20 as CERC20Contract } from "../../generated/templates/Pool/CERC20"
 import * as Utils from '../utils'
 import { BigInt } from "@graphprotocol/graph-ts"
 

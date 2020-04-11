@@ -46,8 +46,6 @@ templates:
       abis:
         - name: Pool
           file: ./abis/PooledCDAI.json
-        - name: CERC20
-          file: ./abis/CERC20.json
       eventHandlers:
         - event: Mint(indexed address,indexed address,uint256)
           handler: handleMint
