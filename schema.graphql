@@ -5,15 +5,12 @@ type Pool @entity {
   totalSupplyHistory: [DataPoint!]!
   totalInterestWithdrawn: BigDecimal!
   totalInterestWithdrawnHistory: [DataPoint!]!
-  beneficiaries: [Beneficiary!]!
-  numBeneficiaries: BigInt!
-  beneficiaryInterestHistory: [BeneficiaryHistory!]! @derivedFrom(field: "pool")
+  beneficiary: String!
   creator: String!
   creationTimestamp: BigInt!
   owner: String!
   name: String!
   symbol: String!
-  totalBeneficiaryWeight: BigInt!
 }
 
 type DataPoint @entity {
@@ -26,19 +23,4 @@ type DataPoint @entity {
 type Registry @entity {
   id: ID!
   numPools: BigInt!
-}
-
-type Beneficiary @entity {
-  id: ID!
-  pool: Pool!
-  dest: String!
-  weight: BigInt!
-}
-
-type BeneficiaryHistory @entity {
-  id: ID!
-  address: String!
-  pool: Pool!
-  totalInterestReceived: BigDecimal!
-  totalInterestReceivedHistory: [DataPoint!]!
 }

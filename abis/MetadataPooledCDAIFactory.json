@@ -1,73 +1,5 @@
 [
   {
-    "inputs": [
-      {
-        "internalType": "address",
-        "name": "_libraryAddress",
-        "type": "address"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "nonpayable",
-    "type": "constructor"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": false,
-        "internalType": "address",
-        "name": "sender",
-        "type": "address"
-      },
-      {
-        "indexed": false,
-        "internalType": "address",
-        "name": "pool",
-        "type": "address"
-      },
-      {
-        "indexed": true,
-        "internalType": "bool",
-        "name": "renounceOwnership",
-        "type": "bool"
-      }
-    ],
-    "name": "CreatePool",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": false,
-        "internalType": "address",
-        "name": "sender",
-        "type": "address"
-      },
-      {
-        "indexed": false,
-        "internalType": "address",
-        "name": "pool",
-        "type": "address"
-      },
-      {
-        "indexed": true,
-        "internalType": "bool",
-        "name": "renounceOwnership",
-        "type": "bool"
-      },
-      {
-        "indexed": false,
-        "internalType": "bytes",
-        "name": "metadata",
-        "type": "bytes"
-      }
-    ],
-    "name": "CreatePoolWithMetadata",
-    "type": "event"
-  },
-  {
     "constant": false,
     "inputs": [
       {
@@ -81,21 +13,9 @@
         "type": "string"
       },
       {
-        "components": [
-          {
-            "internalType": "address",
-            "name": "dest",
-            "type": "address"
-          },
-          {
-            "internalType": "uint256",
-            "name": "weight",
-            "type": "uint256"
-          }
-        ],
-        "internalType": "struct PooledCDAI.Beneficiary[]",
-        "name": "beneficiaries",
-        "type": "tuple[]"
+        "internalType": "address",
+        "name": "beneficiary",
+        "type": "address"
       },
       {
         "internalType": "bool",
@@ -129,21 +49,9 @@
         "type": "string"
       },
       {
-        "components": [
-          {
-            "internalType": "address",
-            "name": "dest",
-            "type": "address"
-          },
-          {
-            "internalType": "uint256",
-            "name": "weight",
-            "type": "uint256"
-          }
-        ],
-        "internalType": "struct PooledCDAI.Beneficiary[]",
-        "name": "beneficiaries",
-        "type": "tuple[]"
+        "internalType": "address",
+        "name": "beneficiary",
+        "type": "address"
       },
       {
         "internalType": "bool",
@@ -182,5 +90,73 @@
     "payable": false,
     "stateMutability": "view",
     "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_libraryAddress",
+        "type": "address"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "constructor"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "sender",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "pool",
+        "type": "address"
+      },
+      {
+        "indexed": true,
+        "internalType": "bool",
+        "name": "renounceOwnership",
+        "type": "bool"
+      },
+      {
+        "indexed": false,
+        "internalType": "bytes",
+        "name": "metadata",
+        "type": "bytes"
+      }
+    ],
+    "name": "CreatePoolWithMetadata",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "sender",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "pool",
+        "type": "address"
+      },
+      {
+        "indexed": true,
+        "internalType": "bool",
+        "name": "renounceOwnership",
+        "type": "bool"
+      }
+    ],
+    "name": "CreatePool",
+    "type": "event"
   }
 ]

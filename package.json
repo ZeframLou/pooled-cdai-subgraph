@@ -4,10 +4,10 @@
   "scripts": {
     "codegen": "graph codegen",
     "build": "graph build",
-    "deploy": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ ZeframLou/pooled-cdai-v2",
-    "create-local": "graph create --node http://localhost:8020/ ZeframLou/pooled-cdai-v2",
-    "remove-local": "graph remove --node http://localhost:8020/ ZeframLou/pooled-cdai-v2",
-    "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 ZeframLou/pooled-cdai-v2"
+    "deploy": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ ZeframLou/pooled-cdai",
+    "create-local": "graph create --node http://localhost:8020/ ZeframLou/pooled-cdai",
+    "remove-local": "graph remove --node http://localhost:8020/ ZeframLou/pooled-cdai",
+    "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 ZeframLou/pooled-cdai"
   },
   "dependencies": {
     "@graphprotocol/graph-cli": "^0.17.1",
